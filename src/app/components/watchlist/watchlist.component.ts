@@ -15,6 +15,7 @@ export class WatchlistComponent {
   ngOnInit() {
     this.WatchList = JSON.parse(localStorage.getItem('watchlist') || '[]');
     this.stockService.watchlist = this.WatchList;
+    console.log(this.WatchList);
   }
 
   removeStockFromWatchList(item: string | undefined) {

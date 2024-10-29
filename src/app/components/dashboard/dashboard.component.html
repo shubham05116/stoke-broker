@@ -8,12 +8,6 @@
 
     <h2 [routerLink]="['/watchList']" class="watchList-btn">WatchList</h2>
 
-    <div class="all-stocks">
-      <div *ngFor="let stock of stockData; trackBy: trackByTicker">
-        <span>{{ stock.ticker }}</span>
-      </div>
-    </div>
-
     <div class="main-div">
       <div class="left-div">
         <input

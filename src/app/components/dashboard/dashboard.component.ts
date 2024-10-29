@@ -57,8 +57,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         ? this.stokeServices.watchlist.filter((item) => item.ticker !== ticker)
         : [...this.stokeServices.watchlist, stock];
 
-       localStorage.setItem('watchlist', JSON.stringify(this.stokeServices.watchlist));
-
+      localStorage.setItem(
+        'watchlist',
+        JSON.stringify(this.stokeServices.watchlist)
+      );
     }
   }
 
