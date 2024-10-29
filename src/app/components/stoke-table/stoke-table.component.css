@@ -1,0 +1,174 @@
+:root {
+    /* Light Mode Colors */
+    --main-bg: #ffffff;
+    --text-color: #333333;
+    --header-text: #000000;
+    --table-bg: #f9f9f9;
+    --header-bg: #f0f0f0;
+    --border-color: #ddd;
+    --hover-bg: #f0f8ff;
+    --bid-color: #22e63c;
+    --ask-color: #dc3545;
+}
+
+.dark-mode {
+    /* Dark Mode Colors */
+    --main-bg: #1e1e1e;
+    --text-color: #e0e0e0;
+    --header-text: #ffffff;
+    --table-bg: #2c2c2c;
+    --header-bg: #3a3a3a;
+    --border-color: #555;
+    --hover-bg: #3c3c3c;
+    --bid-color: #20e22a;
+    --ask-color: #ff6b6b;
+}
+
+/* Outer Container */
+.outer-div {
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Main Div */
+.main-div {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Header and Subheader */
+.main-div h1,
+.main-div h2 {
+    margin: 10px 0;
+    color: var(--header-text);
+}
+
+/* Mat Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--table-bg);
+    transition: background-color 0.3s;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+/* Bid and Ask Cells */
+.light-mode .bid {
+    color: rgb(62, 231, 62) !important;
+    ;
+    font-weight: bold;
+}
+
+.light-mode .ask {
+    color: red !important;
+    font-weight: bold;
+}
+
+.dark-mode .bid {
+    color: var(--bid-color);
+    font-weight: bold;
+}
+
+.dark-mode .ask {
+    color: var(--ask-color);
+    font-weight: bold;
+}
+
+
+mat-header-cell {
+    font-weight: bold;
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    border-bottom: 2px solid var(--border-color);
+}
+
+
+
+/* Row Hover Effect */
+tr:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Example Button for Stock Actions */
+.example-flex-container button {
+    background-color: #3f51b5;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.example-flex-container button:hover {
+    background-color: #303f9f;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-button {
+    padding: 12px 18px;
+    color: var(--header-text);
+    background-color: transparent;
+    border: 2px solid var(--header-text);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.theme-toggle-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Search Bar */
+.search-bar {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 18px;
+    transition: border-color 0.3s;
+    background-color: var(--table-bg);
+    color: var(--text-color);
+}
+
+.search-bar:focus {
+    border-color: #4caf50;
+    outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-div {
+        flex-direction: column;
+    }
+
+    .left-div {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        box-shadow: none;
+    }
+
+    .right-div {
+        width: 100%;
+    }
+
+    .theme-toggle-button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,61 @@
+  <div [ngClass]="isDarkMode ? 'dark-mode' : 'light-mode'" class="outer-div">
+    <div class="header">
+      <h1>Dashboard</h1>
+      <button class="theme-toggle-button" (click)="toggleTheme()">
+        {{ isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode" }}
+      </button>
+    </div>
+
+    <h2 [routerLink]="['/watchList']" class="watchList-btn">WatchList</h2>
+
+    <div class="all-stocks">
+      <div *ngFor="let stock of stockData; trackBy: trackByTicker">
+        <span>{{ stock.ticker }}</span>
+      </div>
+    </div>
+
+    <div class="main-div">
+      <div class="left-div">
+        <input
+          type="text"
+          placeholder="Search stocks..."
+          [(ngModel)]="searchTerm"
+          (input)="filterStocks()"
+          class="search-bar"
+        />
+
+        <div *ngFor="let stock of filteredData; trackBy: trackByTicker">
+          <div class="inner-left-div">
+            <p>{{ stock.ticker }}</p>
+
+            <div class="stock-btn">
+              <span (click)="addToWatchList(stock.ticker)">
+                {{ isInWatchList(stock.ticker) ? "-" : "+" }}
+              </span>
+
+              <section>
+                <div class="example-flex-container">
+                  <button
+                    (click)="showTableData(stock.ticker)"
+                    mat-mini-fab
+                    aria-label="Example icon button with a menu icon"
+                  >
+                    <mat-icon>menu</mat-icon>
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-div">
+        <app-stoke-table
+          *ngIf="selectedStock"
+          [stock]="selectedStock.data"
+          [stocks]="selectedStock"
+          [isDarkMode]="isDarkMode"
+        ></app-stoke-table>
+      </div>
+    </div>
+  </div>
