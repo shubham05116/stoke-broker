@@ -1,0 +1,74 @@
+/* WatchList Header */
+.watchlist-header {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 20px 0;
+    color: #007bff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* WatchList Container */
+  .watchlist-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+  }
+  
+  /* Stock Item */
+  .stock-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: transform 0.2s, background-color 0.3s;
+  }
+  
+  /* Stock Table */
+  .stock-table {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  /* Remove Button */
+  .remove-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Hover Effect for Remove Button */
+  .remove-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+  }
+  
+  /* Empty List Message */
+  .empty-message {
+    text-align: center;
+    font-size: 24px;
+    color: #6c757d;
+    margin-top: 20px;
+  }
+  
+  .dark-mode .main-div{
+    background-color: black;
+    height: 100%;
+  }
+  .dark-mode .watchlist-header{
+    color: white !important;
+  }
+  

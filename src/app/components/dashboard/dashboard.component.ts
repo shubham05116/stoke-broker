@@ -11,11 +11,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   stockData: StockData[] = [];
   filteredData: StockData[] = [];
   originalStockData: StockData[] = [];
-  WatchList: StockData[] = [];
   selectedStock: StockData | null = null;
   searchTerm: string = '';
-  isDarkMode: boolean = true;
   intervalId: any;
+  isDarkMode: boolean = true;
 
   constructor(private stokeServices: StokeService) {}
 
@@ -27,7 +26,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.selectedStock = this.stockData[0];
       }
     });
-
     this.intervalId = setInterval(() => this.randomizeData(), 1000);
   }
 
@@ -36,12 +34,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   toggleTheme() {
-    this.isDarkMode = !this.isDarkMode;
+    this.stokeServices.darkMode = !this.stokeServices.darkMode;
+    this.isDarkMode = this.stokeServices.darkMode;
   }
 
   showTableData(ticker: string) {
     const foundStock = this.findStock(ticker);
-
     if (this.selectedStock && this.selectedStock.ticker === ticker) {
       this.selectedStock = null;
     } else if (foundStock) {
@@ -52,15 +50,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
   addToWatchList(ticker: string) {
     const stock = this.findStock(ticker);
     if (stock) {
-      const exists = this.WatchList.some((item) => item.ticker === ticker);
-      this.WatchList = exists
-        ? this.WatchList.filter((item) => item.ticker !== ticker)
-        : [...this.WatchList, stock];
+      const exists = this.stokeServices.watchlist.some(
+        (item) => item.ticker === ticker
+      );
+      this.stokeServices.watchlist = exists
+        ? this.stokeServices.watchlist.filter((item) => item.ticker !== ticker)
+        : [...this.stokeServices.watchlist, stock];
+
+       localStorage.setItem('watchlist', JSON.stringify(this.stokeServices.watchlist));
+
     }
   }
 
   isInWatchList(ticker: string): boolean {
-    return this.WatchList.some((stock) => stock.ticker === ticker);
+    return this.stokeServices.watchlist.some(
+      (stock) => stock.ticker === ticker
+    );
   }
 
   filterStocks() {
