@@ -24,7 +24,7 @@
 
             <div class="stock-btn">
               <span (click)="addToWatchList(stock.ticker)">
-                {{ isInWatchList(stock.ticker) ? "-" : "+" }}
+                {{isWishList(stock.ticker) ? "-" : "+" }}
               </span>
 
               <section>

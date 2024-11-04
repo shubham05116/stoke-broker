@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StockData } from 'src/app/interfaces/stock';
 import { StokeService } from 'src/app/services/stoke.service';
 
 @Component({
@@ -7,15 +8,14 @@ import { StokeService } from 'src/app/services/stoke.service';
   styleUrls: ['./watchlist.component.css'],
 })
 export class WatchlistComponent {
-  WatchList = this.stockService.watchlist;
-  isDarkMode = this.stockService.darkMode;
+  WatchList!: StockData[];
+  isDarkMode!: boolean;
 
   constructor(private stockService: StokeService) {}
 
   ngOnInit() {
-    this.WatchList = JSON.parse(localStorage.getItem('watchlist') || '[]');
-    this.stockService.watchlist = this.WatchList;
-    console.log(this.WatchList);
+    this.WatchList = this.stockService.watchlist;
+    this.isDarkMode = this.stockService.darkMode;
   }
 
   removeStockFromWatchList(item: string | undefined) {

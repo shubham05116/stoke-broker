@@ -14,18 +14,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
   selectedStock: StockData | null = null;
   searchTerm: string = '';
   intervalId: any;
-  isDarkMode: boolean = true;
+  isDarkMode!: boolean;
 
   constructor(private stokeServices: StokeService) {}
 
   ngOnInit() {
     this.stokeServices.getstockData().subscribe((data) => {
-      this.stockData = data;
+      this.stokeServices.stockData = data;
       this.originalStockData = [...data];
-      if (this.stockData.length > 0) {
-        this.selectedStock = this.stockData[0];
+      if (this.stokeServices.stockData.length > 0) {
+        this.selectedStock = this.stokeServices.stockData[0];
       }
+      this.stockData = this.stokeServices.stockData;
     });
+    this.isDarkMode = this.stokeServices.darkMode;
     this.intervalId = setInterval(() => this.randomizeData(), 1000);
   }
 
@@ -40,34 +42,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   showTableData(ticker: string) {
     const foundStock = this.findStock(ticker);
-    if (this.selectedStock && this.selectedStock.ticker === ticker) {
-      this.selectedStock = null;
-    } else if (foundStock) {
-      this.selectedStock = foundStock;
-    }
+    if (foundStock)
+      this.selectedStock =
+        this.selectedStock?.ticker === ticker ? null : foundStock;
   }
 
   addToWatchList(ticker: string) {
     const stock = this.findStock(ticker);
     if (stock) {
-      const exists = this.stokeServices.watchlist.some(
-        (item) => item.ticker === ticker
-      );
-      this.stokeServices.watchlist = exists
-        ? this.stokeServices.watchlist.filter((item) => item.ticker !== ticker)
-        : [...this.stokeServices.watchlist, stock];
-
-      localStorage.setItem(
-        'watchlist',
-        JSON.stringify(this.stokeServices.watchlist)
-      );
+      this.stokeServices.addToWatchList(stock);
     }
   }
 
-  isInWatchList(ticker: string): boolean {
-    return this.stokeServices.watchlist.some(
-      (stock) => stock.ticker === ticker
-    );
+  isWishList(ticker: string) {
+    return this.stokeServices.isInWatchList(ticker);
   }
 
   filterStocks() {
@@ -81,15 +69,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   randomizeData() {
     this.stockData.forEach((stock: any) => {
+      let i = 0;
       stock.data.forEach((item: any) => {
         item.bid_volume = Math.max(
           0,
-          Math.floor(item.volume + (Math.random() * 1000 - 500))
+          Math.floor(item.bid_volume + Math.random())
         );
         item.ask_volume = Math.max(
           0,
-          Math.floor(item.volume + (Math.random() * 500 - 1000))
+          Math.floor(item.ask_volume + Math.random())
         );
+        i++;
       });
     });
   }

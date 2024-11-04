@@ -2,8 +2,8 @@ export interface Stock {
   volume?: number;
   bid?: number;
   ask?: number;
-  last_trade_price?: number;
-  number_of_buyers?: number;
+  ask_volume?: number;
+  bid_volume?: number;
   quantity?: number;
 }
 

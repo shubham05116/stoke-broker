@@ -1,8 +1,10 @@
 <div [ngClass]="isDarkMode ? 'dark-mode' : 'light-mode'" class="outer-div">
 
 <div *ngIf="stocks?.ticker" class="main-div">
-  <h1>{{ stocks?.ticker }}</h1>
-  <h2>LTP: {{ stocks?.last_trade_price }}</h2>
+  <h1>{{ stocks.ticker }}</h1>
+  <h2>LTP: {{ stocks.last_trade_price }}</h2>
+  <button (click)="detailsPageHandler(stocks.ticker)">Details</button>
+
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="BidVol">
       <th mat-header-cell *matHeaderCellDef>Volume</th>

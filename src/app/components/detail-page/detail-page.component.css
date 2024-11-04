@@ -1,3 +1,17 @@
+.ask {
+    background-color: red;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+}
+
+.bid {
+    background-color: blue;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+}
+
 :root {
     /* Light Mode Colors */
     --main-bg: #ffffff;
@@ -7,8 +21,8 @@
     --header-bg: #f0f0f0;
     --border-color: #ddd;
     --hover-bg: #f0f8ff;
-    --bid-color: #22e63c;
-    --ask-color: #dc3545;
+    --bid-color: white;
+    --ask-color: white;
 }
 
 .dark-mode {
@@ -20,14 +34,26 @@
     --header-bg: #3a3a3a;
     --border-color: #555;
     --hover-bg: #3c3c3c;
-    --bid-color: #20e22a;
-    --ask-color: #ff6b6b;
+    --bid-color: white;
+    --ask-color: white;
 }
 
 /* Outer Container */
 .outer-div {
     padding: 20px;
     transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode {
+    background-color: black;
+    min-height: 100%;
+    color: white;
+}
+
+.light-mode {
+    background-color: white;
+    color: black;
+
 }
 
 /* Mat Table Styling */
@@ -79,7 +105,6 @@ td {
     padding: 20px;
     border-radius: 10px;
     /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
-    color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -87,32 +112,20 @@ td {
 .main-div h1,
 .main-div h2 {
     margin: 10px 0;
-    color: var(--header-text);
 }
 
 
 
 /* Bid and Ask Cells */
 .light-mode .bid {
-    color: rgb(62, 231, 62) !important;
-    ;
     font-weight: bold;
 }
 
 .light-mode .ask {
-    color: red !important;
     font-weight: bold;
 }
 
-.dark-mode .bid {
-    color: var(--bid-color);
-    font-weight: bold;
-}
 
-.dark-mode .ask {
-    color: var(--ask-color);
-    font-weight: bold;
-}
 
 
 

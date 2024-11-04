@@ -14,9 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { RouterModule } from '@angular/router';
+import { DetailPageComponent } from './components/detail-page/detail-page.component';
 
 @NgModule({
-  declarations: [AppComponent, StokeTableComponent, DashboardComponent, WatchlistComponent],
+  declarations: [AppComponent, StokeTableComponent, DashboardComponent, WatchlistComponent, DetailPageComponent],
   imports: [BrowserModule, FormsModule ,AppRoutingModule, HttpClientModule ,MatIconModule, MatTableModule, MatSortModule, BrowserAnimationsModule , RouterModule],
   providers: [StokeService],
   bootstrap: [AppComponent],

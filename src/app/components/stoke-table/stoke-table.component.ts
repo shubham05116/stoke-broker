@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Stock, StockData } from 'src/app/interfaces/stock';
 
 @Component({
@@ -14,8 +15,12 @@ export class StokeTableComponent {
   set stock(value: any) {
     this.dataSource = value;
   }
-  @Input() isDarkMode!: boolean
+  @Input() isDarkMode!: boolean;
 
   @Input() stocks!: StockData;
-  constructor() {}
+  constructor(private router: Router) {}
+
+  detailsPageHandler(item: string) {
+    this.router.navigate(['/details'], { queryParams: { stock: item } });
+  }
 }
