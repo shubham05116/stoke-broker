@@ -11,10 +11,9 @@ import { StokeService } from 'src/app/services/stoke.service';
 })
 export class DetailPageComponent implements OnInit {
   selectedStock: StockData[] = [];
-  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
+  dataSource: MatTableDataSource<Stock> = new MatTableDataSource<Stock>();
   displayedColumns: string[] = ['Bid', 'Price', 'Ask'];
   isDarkMode!: boolean;
-
 
   constructor(
     private stockService: StokeService,
@@ -37,11 +36,9 @@ export class DetailPageComponent implements OnInit {
       const data = this.selectedStock[0]?.data || [];
       const mergedData: any[] = [];
       const totalRows = data.length * 2;
-
       for (let i = 0; i < totalRows; i++) {
         if (i < data.length) {
           const index = data.length - 1 - i;
-
           mergedData.push({
             bid: '',
             price: data[index].ask,

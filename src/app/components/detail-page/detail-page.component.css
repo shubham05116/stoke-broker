@@ -1,17 +1,3 @@
-.ask {
-    background-color: red;
-    text-align: center;
-    color: white;
-    font-weight: 700;
-}
-
-.bid {
-    background-color: blue;
-    text-align: center;
-    color: white;
-    font-weight: 700;
-}
-
 :root {
     /* Light Mode Colors */
     --main-bg: #ffffff;
@@ -42,6 +28,20 @@
 .outer-div {
     padding: 20px;
     transition: background-color 0.3s, color 0.3s;
+}
+
+.ask {
+    background-color: red;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+}
+
+.bid {
+    background-color: blue;
+    text-align: center;
+    color: white;
+    font-weight: 700;
 }
 
 .dark-mode {

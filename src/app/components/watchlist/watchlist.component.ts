@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StockData } from 'src/app/interfaces/stock';
 import { StokeService } from 'src/app/services/stoke.service';
 
@@ -7,7 +7,7 @@ import { StokeService } from 'src/app/services/stoke.service';
   templateUrl: './watchlist.component.html',
   styleUrls: ['./watchlist.component.css'],
 })
-export class WatchlistComponent {
+export class WatchlistComponent implements OnInit {
   WatchList!: StockData[];
   isDarkMode!: boolean;
 
