@@ -7,21 +7,10 @@ import { StokeService } from 'src/app/services/stoke.service';
   templateUrl: './watchlist.component.html',
   styleUrls: ['./watchlist.component.css'],
 })
-export class WatchlistComponent implements OnInit {
-  WatchList!: StockData[];
-  isDarkMode!: boolean;
+export class WatchlistComponent  {
+
 
   constructor(private stockService: StokeService) {}
 
-  ngOnInit() {
-    this.WatchList = this.stockService.watchlist;
-    this.isDarkMode = this.stockService.darkMode;
-  }
 
-  removeStockFromWatchList(item: string | undefined) {
-    this.WatchList = this.WatchList.filter(
-      (watchList) => watchList?.ticker !== item
-    );
-    localStorage.setItem('watchlist', JSON.stringify(this.WatchList));
-  }
 }

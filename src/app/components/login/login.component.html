@@ -1,0 +1,53 @@
+<div class="login-container">
+  <h2>Login to Your Account</h2>
+  
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input 
+        type="email" 
+        id="email" 
+        name="email" 
+        [(ngModel)]="user.email"
+        #email="ngModel"
+        required
+        email
+        class="form-control"
+        placeholder="Enter your email">
+      <div class="error-message" *ngIf="email.invalid && (email.dirty || email.touched)">
+        <span *ngIf="email.errors?.['required']">Email is required</span>
+        <span *ngIf="email.errors?.['email']">Please enter a valid email</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input 
+        type="password" 
+        id="password" 
+        name="password" 
+        [(ngModel)]="user.password"
+        #password="ngModel"
+        required
+        class="form-control"
+        placeholder="Enter your password">
+      <div class="error-message" *ngIf="password.invalid && (password.dirty || password.touched)">
+        <span *ngIf="password.errors?.['required']">Password is required</span>
+      </div>
+    </div>
+
+
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid || loading">
+      <span *ngIf="!loading">Login</span>
+      <span *ngIf="loading">Logging in...</span>
+    </button>
+
+    <div class="signup-link">
+      Don't have an account? <a routerLink="/signup">Sign up here</a>
+    </div>
+  </form>
+</div> 

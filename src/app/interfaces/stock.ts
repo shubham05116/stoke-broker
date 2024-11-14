@@ -1,14 +1,33 @@
 export interface Stock {
-  volume?: number;
-  bid?: number;
-  ask?: number;
-  ask_volume?: number;
-  bid_volume?: number;
-  quantity?: number;
+  volume?: any;
+  bid?: any;
+  ask?: any;
+  ask_volume?: any;
+  bid_volume?: any;
+  quantity?: any;
 }
 
 export interface StockData {
   ticker: string;
-  last_trade_price: number;
-  data?: Array<Stock>;
+  company: string;
+  price: number;
+  percent_change: number;
+  net_change: number;
+  bid: number;
+  ask: number;
+  high: number;
+  low: number;
+  open: number;
+  volume: number;
+  close: number;
+  bid_volume?: number;
+  ask_volume?: number;
+  data?: OrderBookEntry[];
+}
+
+interface OrderBookEntry {
+  bid: number;
+  ask: number;
+  bid_volume: number;
+  ask_volume: number;
 }

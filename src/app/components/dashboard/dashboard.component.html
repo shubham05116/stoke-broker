@@ -1,55 +1,76 @@
-  <div [ngClass]="isDarkMode ? 'dark-mode' : 'light-mode'" class="outer-div">
-    <div class="header">
-      <h1>Dashboard</h1>
+<div [ngClass]="isDarkMode ? 'dark-mode' : 'light-mode'" class="outer-div">
+  <div class="header">
+    <h1>Dashboard</h1>
+    <div class="header-buttons">
       <button class="theme-toggle-button" (click)="toggleTheme()">
         {{ isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode" }}
       </button>
+      <button class="logout-button" (click)="logout()">Logout</button>
     </div>
+  </div>
 
-    <h2 [routerLink]="['/watchList']" class="watchList-btn">WatchList</h2>
+  <div class="main-div">
+    <div class="left-div">
+      <input
+        type="text"
+        placeholder="Search stocks..."
+        [(ngModel)]="searchTerm"
+        (input)="filterStocks()"
+        class="search-bar"
+      />
 
-    <div class="main-div">
-      <div class="left-div">
-        <input
-          type="text"
-          placeholder="Search stocks..."
-          [(ngModel)]="searchTerm"
-          (input)="filterStocks()"
-          class="search-bar"
-        />
-
+      <div class="filtered-data-section">
         <div *ngFor="let stock of filteredData; trackBy: trackByTicker">
           <div class="inner-left-div">
-            <p>{{ stock.ticker }}</p>
+            <div (click)="showTableData(stock.ticker)">
+              <p>{{ stock.ticker }}</p>
+              <p>{{ stock.price }}</p>
+            </div>
 
             <div class="stock-btn">
               <span (click)="addToWatchList(stock.ticker)">
-                {{isWishList(stock.ticker) ? "-" : "+" }}
+                {{ isWishList(stock.ticker) ? "-" : "+" }}
               </span>
-
-              <section>
-                <div class="example-flex-container">
-                  <button
-                    (click)="showTableData(stock.ticker)"
-                    mat-mini-fab
-                    aria-label="Example icon button with a menu icon"
-                  >
-                    <mat-icon>menu</mat-icon>
-                  </button>
-                </div>
-              </section>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="right-div">
-        <app-stoke-table
-          *ngIf="selectedStock"
-          [stock]="selectedStock.data"
-          [stocks]="selectedStock"
-          [isDarkMode]="isDarkMode"
-        ></app-stoke-table>
+      <div class="watchlist-section">
+        <h2 *ngIf="WatchList.length > 0" class="watchList-btn">WatchList</h2>
+        <div
+          cdkDropList
+          class="watchlist-container"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div *ngFor="let list of WatchList" class="inner-left-div" cdkDrag>
+            <div (click)="showTableData(list.ticker)">
+              <p>{{ list.ticker }}</p>
+              <p>{{ list.price }}</p>
+            </div>
+            <button
+              *ngIf="selectedStock"
+              mat-button
+              (click)="openDialog(list.ticker)"
+            >
+              DS
+            </button>
+
+            <div class="stock-btn">
+              <span (click)="removeStockFromWatchList(list?.ticker)"> - </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="right-div">
+      <app-stoke-table
+        *ngIf="selectedStock"
+        [stock]="selectedStock.data"
+        [stocks]="selectedStock"
+        [isDarkMode]="isDarkMode"
+      ></app-stoke-table>
+    </div>
   </div>
+</div>

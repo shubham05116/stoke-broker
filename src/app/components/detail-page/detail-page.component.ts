@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Stock, StockData } from 'src/app/interfaces/stock';
 import { StokeService } from 'src/app/services/stoke.service';
 
@@ -17,18 +17,24 @@ export class DetailPageComponent implements OnInit {
 
   constructor(
     private stockService: StokeService,
-    private route: ActivatedRoute
+    @Inject(MAT_DIALOG_DATA) public data: { stock: StockData },
+    private dialogRef: MatDialogRef<DetailPageComponent>
   ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
-      const stock = params['stock'];
-      this.selectedStock = this.stockService.stockData.filter((stockData) => {
-        return stockData.ticker === stock;
-      });
+    this.selectedStock = [this.data.stock];
+    this.setData();
+    
+    setInterval(() => {
+      this.randomizeData();
       this.setData();
-    });
+    }, 4000);
+
     this.isDarkMode = this.stockService.darkMode;
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 
   setData() {
@@ -54,6 +60,19 @@ export class DetailPageComponent implements OnInit {
         }
       }
       this.dataSource.data = mergedData;
+    }
+  }
+
+  randomizeData() {
+    if (this.selectedStock.length > 0 && this.selectedStock[0]?.data) {
+      this.selectedStock[0].data.forEach((item: any) => {
+        const bidVolumeChange = item.bid_volume * (0.4 * Math.random() - 0.2);
+        const askVolumeChange = item.ask_volume * (0.4 * Math.random() - 0.2);
+
+        const MAX_VOLUME = 1000000;
+        item.bid_volume = Math.min(MAX_VOLUME, Math.max(0, Math.floor(item.bid_volume + bidVolumeChange)));
+        item.ask_volume = Math.min(MAX_VOLUME, Math.max(0, Math.floor(item.ask_volume + askVolumeChange)));
+      });
     }
   }
 }

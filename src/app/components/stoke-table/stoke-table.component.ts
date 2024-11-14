@@ -10,17 +10,19 @@ import { Stock, StockData } from 'src/app/interfaces/stock';
 })
 export class StokeTableComponent {
   displayedColumns: string[] = ['BidVol', 'Bid', 'Ask', 'AskVol'];
-  dataSource: MatTableDataSource<Stock> = new MatTableDataSource<Stock>();
+  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
   @Input()
   set stock(value: any) {
     this.dataSource = value;
   }
   @Input() isDarkMode!: boolean;
 
-  @Input() stocks!: StockData;
-  constructor(private router: Router) {}
-
-  detailsPageHandler(item: string) {
-    this.router.navigate(['/details'], { queryParams: { stock: item } });
+  @Input() stocks!: any;
+  constructor(private router: Router) {
   }
+
+  ngOnChanges() {
+    console.log(this.stocks);
+  }
+
 }

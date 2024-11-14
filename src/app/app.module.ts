@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,11 +17,42 @@ import { FormsModule } from '@angular/forms';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { RouterModule } from '@angular/router';
 import { DetailPageComponent } from './components/detail-page/detail-page.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { MatButtonModule } from '@angular/material/button';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
-  declarations: [AppComponent, StokeTableComponent, DashboardComponent, WatchlistComponent, DetailPageComponent],
-  imports: [BrowserModule, FormsModule ,AppRoutingModule, HttpClientModule ,MatIconModule, MatTableModule, MatSortModule, BrowserAnimationsModule , RouterModule],
-  providers: [StokeService],
+  declarations: [
+    AppComponent,
+    StokeTableComponent,
+    DashboardComponent,
+    WatchlistComponent,
+    DetailPageComponent,
+    SignupComponent,
+    LoginComponent,
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MatIconModule,
+    MatTableModule,
+    MatSortModule,
+    BrowserAnimationsModule,
+    RouterModule,
+    DragDropModule,
+    MatDialogModule,
+    MatDialogModule,
+    MatButtonModule,
+  ],
+  providers: [
+    StokeService,
+    AuthService, // Add this line
+    AuthGuard,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

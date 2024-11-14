@@ -46,7 +46,7 @@
 
 .dark-mode {
     background-color: black;
-    min-height: 100%;
+    min-height: auto;
     color: white;
 }
 
@@ -177,7 +177,9 @@ td {
     border-color: #4caf50;
     outline: none;
 }
-
+.price-cell{
+    text-align: center;
+}
 /* Responsive Design */
 @media (max-width: 768px) {
     .main-div {
